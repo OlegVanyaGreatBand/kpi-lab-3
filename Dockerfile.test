@@ -1,0 +1,10 @@
+FROM golang:1.15 as build
+
+RUN apt-get update && apt-get install -y ninja-build
+
+RUN go get -u github.com/OlegVanyaGreatBand/kpi-lab-1/build/cmd/bood
+
+WORKDIR /go/src/practice-2
+COPY . .
+
+ENTRYPOINT ["bood", "out/bin/integration", "out/reports/integration/test.txt"]
